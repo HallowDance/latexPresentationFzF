@@ -1,0 +1,13 @@
+\babel@toc {bulgarian}{}
+\beamer@sectionintoc {1}{Струнна теория и AdS/CFT съответствие}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Теория на струните - мотивация и действие}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Холографско съответствие}{6}{0}{1}
+\beamer@sectionintoc {2}{Въведение в проблематиката}{8}{0}{2}
+\beamer@subsectionintoc {2}{1}{Нерелативистка холография}{9}{0}{2}
+\beamer@subsectionintoc {2}{2}{TsT трансформация}{9}{0}{2}
+\beamer@subsectionintoc {2}{3}{Многообразия на Сасаки-Айнщайн, $T^{1,1}$}{9}{0}{2}
+\beamer@sectionintoc {3}{Изследване на струнни решения върху $Schr_5\times T^{1,1}$}{16}{0}{3}
+\beamer@subsectionintoc {3}{1}{Постановка на задачата}{17}{0}{3}
+\beamer@subsectionintoc {3}{2}{Анзац за решенията, уравнения за движение}{17}{0}{3}
+\beamer@subsectionintoc {3}{3}{Параметри на солитонното решение}{17}{0}{3}
+\beamer@subsectionintoc {3}{4}{Дисперсионни съотношения}{17}{0}{3}

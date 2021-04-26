@@ -1,0 +1,842 @@
+% Presentation theme for Faculty of Physics, Sofia University
+% Inspired by the University of Oslo's Department 
+% of Mathematics beamer theeme.
+
+% This version is intended for screen presentation,
+% rather than use on canvas.
+%
+% Made by Ivo Iliev
+% Version 09-08-2020
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[T2A]{fontenc}
+\RequirePackage{calc}
+\RequirePackage{eso-pic}
+\RequirePackage{etoolbox}
+\RequirePackage{thmtools}
+\RequirePackage{tikz}
+\RequirePackage{hyperref}
+\hypersetup{unicode,
+            colorlinks,
+            urlcolor  = uiolink,
+            linkcolor =,
+            citecolor =}
+
+\setbeamertemplate{caption}[numbered]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Standard headers:
+\DeclareOptionBeamer{english}  { \def \MATHlang {eng} }
+\DeclareOptionBeamer{bulg}
+{
+    \def \MATHlang {bg}
+    \pretolerance = 2000
+    \tolerance    = 6000
+    \hbadness     = 6000
+}
+\urlstyle{sf}
+
+%% Vertical text alignment:
+\DeclareOptionBeamer{c}{ \beamer@centeredtrue  }
+\DeclareOptionBeamer{t}{ \beamer@centeredfalse }
+
+
+%% Theorem numbers:
+\DeclareOptionBeamer{unnumbered}{ \def \MATHtheorem {}          }
+\DeclareOptionBeamer{numbered}  { \def \MATHtheorem {numbered}  }
+\DeclareOptionBeamer{AMS}       { \def \MATHtheorem {ams style} }
+
+
+%% Font:
+\providebool{neohellenic}
+\providebool{latinmodern}
+\DeclareOptionBeamer{SansSerif}
+{
+    \def \MATHfont {default}
+    \setbool{neohellenic}{true}
+    \setbool{latinmodern}{false}
+    \AtBeginDocument{\sbox0{\(\mathsf{\xdef\mathsfgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathsfgroup}
+}
+\DeclareOptionBeamer{MathSerif}
+{
+    \def \MATHfont {professionalfonts}
+    \setbool{neohellenic}{false}
+    \setbool{latinmodern}{false}
+    \AtBeginDocument{\sbox0{\(\mathrm{\xdef\mathrmgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathrmgroup}
+}
+\DeclareOptionBeamer{Serif}
+{%
+    \def \MATHfont {serif}
+    \setbool{neohellenic}{false}
+    \setbool{latinmodern}{true}
+    \AtBeginDocument{\sbox0{\(\mathrm{\xdef\mathrmgroup{\the\mathgroup}}\)}}
+    \def\operator@font{\mathgroup\mathrmgroup}
+}
+
+
+%% Logo on all slides
+\providebool{logo}
+\DeclareOptionBeamer{Logo}  { \setbool{logo}{true} }
+\DeclareOptionBeamer{NoLogo}{ \setbool{logo}{false} }
+
+
+%% Automatic first and last frame:
+\DeclareOptionBeamer{TitlePage} { \def \MATHfirstframe {\TitlePage}  }
+\DeclareOptionBeamer{FinalFrame}{ \def \MATHlastframe  {\FinalFrame} }
+\DeclareOptionBeamer{NoTitlePage} { \def \MATHfirstframe {} }
+\DeclareOptionBeamer{NoFinalFrame}{ \def \MATHlastframe  {} }
+
+%% Default Options
+\ExecuteOptionsBeamer{english}
+\ExecuteOptionsBeamer{t}
+\ExecuteOptionsBeamer{unnumbered}
+\ExecuteOptionsBeamer{SansSerif}
+\ExecuteOptionsBeamer{Logo}
+\ExecuteOptionsBeamer{TitlePage}
+\ExecuteOptionsBeamer{FinalFrame}
+\ProcessOptionsBeamer
+
+%% Widescreen
+%% Equivalent to document class option "aspectratio = 169"
+\setlength\beamer@paperwidth{16.00cm}
+\setlength\beamer@paperheight{9.00cm}
+
+
+\AtBeginDocument{ \MATHfirstframe }
+\AtEndDocument  { \MATHlastframe  }
+
+
+% Use a neohellenic font from the Greek Font Society
+% for small, greek letters. It is a sans serif that
+% matches Helvetica better in style and weight than
+% the standard Computer Modern.
+\ifbool{neohellenic}
+{
+    \DeclareSymbolFont{neomath}{OML}{neohellenic}{m}{n}
+    \DeclareMathSymbol{\alpha}\mathord{neomath}{"0B}
+    \DeclareMathSymbol{\beta}\mathord{neomath}{"0C}
+    \DeclareMathSymbol{\gamma}\mathord{neomath}{"0D}
+    \DeclareMathSymbol{\delta}\mathord{neomath}{"0E}
+    \DeclareMathSymbol{\epsilon}\mathord{neomath}{"0F}
+    \DeclareMathSymbol{\zeta}\mathord{neomath}{"10}
+    \DeclareMathSymbol{\eta}\mathord{neomath}{"11}
+    \DeclareMathSymbol{\theta}\mathord{neomath}{"12}
+    \DeclareMathSymbol{\theta}\mathord{neomath}{"12}
+    \DeclareMathSymbol{\iota}\mathord{neomath}{"13}
+    \DeclareMathSymbol{\kappa}\mathord{neomath}{"14}
+    \DeclareMathSymbol{\lambda}\mathord{neomath}{"15}
+    \DeclareMathSymbol{\mu}\mathord{neomath}{"16}
+    \DeclareMathSymbol{\nu}\mathord{neomath}{"17}
+    \DeclareMathSymbol{\xi}\mathord{neomath}{"18}
+    \DeclareMathSymbol{\pi}\mathord{neomath}{"19}
+    \DeclareMathSymbol{\rho}\mathord{neomath}{"1A}
+    \DeclareMathSymbol{\sigma}\mathord{neomath}{"1B}
+    \DeclareMathSymbol{\tau}\mathord{neomath}{"1C}
+    \DeclareMathSymbol{\upsilon}\mathord{neomath}{"1D}
+    \DeclareMathSymbol{\phi}\mathord{neomath}{"1E}
+    \DeclareMathSymbol{\chi}\mathord{neomath}{"1F}
+    \DeclareMathSymbol{\psi}\mathord{neomath}{"20}
+    \DeclareMathSymbol{\omega}\mathord{neomath}{"21}
+    \DeclareMathSymbol{\varepsilon}\mathord{neomath}{"22}
+    \DeclareMathSymbol{\vartheta}\mathord{neomath}{"23}
+    \DeclareMathSymbol{\varpi}\mathord{neomath}{"24}
+    \DeclareMathSymbol{\varrho}\mathord{neomath}{"25}
+    \DeclareMathSymbol{\varsigma}\mathord{neomath}{"26}
+    \DeclareMathSymbol{\varphi}\mathord{neomath}{"27}
+}
+{}
+
+\ifbool{latinmodern}
+{
+    \renewcommand{\rmdefault}{lmr} % Latin Modern Roman
+}
+{
+   \renewcommand{\rmdefault}{pbk}  % Bookman
+}
+
+\renewcommand{\sfdefault}{phv} % Helvetica
+\renewcommand{\ttdefault}{pcr} % Courier
+
+
+%% Allow more stretching
+\setlength{\emergencystretch}{3em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Official colours:
+\definecolor{uiored}{cmyk}{0, 1, 1, 0.0}
+\definecolor{uiogrey1}{RGB}{243, 242, 240}
+\definecolor{uiogrey2}{RGB}{234, 231, 226}
+\definecolor{uiogrey3}{RGB}{222, 219, 214}
+\definecolor{uiogrey4}{RGB}{210, 205, 199}
+\definecolor{uiogrey5}{cmyk}{0, 0.05, 0.1, 0.29}
+\definecolor{uiolink}{HTML}{0B5A9D}
+\definecolor{matnat}{cmyk}{1, 0, 0.69, 0.3}
+%% Theme-specific colours:
+\colorlet{blockbody}{uiogrey3}
+\definecolor{colortheme}{cmyk}{0, 0, 0, 0.8}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\mode<presentation>
+
+\useinnertheme{circles}
+\usefonttheme{\MATHfont}
+
+\setbeamertemplate{theorems}[\MATHtheorem]
+\setbeamertemplate{qed symbol}{\(\blacksquare\)}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption label separator}{: }
+\setbeamersize{text margin left  = 5mm,
+               text margin right = 5mm}
+
+
+%% Standard colours:
+%\definecolor{bostonuniversityred}{rgb}{0.8, 0.0, 0.0}V
+\definecolor{bostonuniversityred}{rgb}{0.34, 0.01, 0.1}
+\colorlet{alert}{bostonuniversityred}
+\setbeamercolor{structure}{fg = colortheme}
+\setbeamercolor{title}{fg = bostonuniversityred}
+\setbeamercolor{subtitle}{fg = structure}
+\setbeamercolor{frametitle}{fg = black}
+\setbeamercolor*{qed symbol}{fg = black}
+\setbeamercolor{block title}{fg = white,
+                             bg = black}
+\setbeamercolor{block body} {bg = blockbody}
+\setbeamercolor{block title example}{fg = white,
+                                     bg = structure}
+\setbeamercolor{block body example} {bg = blockbody}
+\setbeamercolor{block title alerted}{fg = white,
+                                     bg = alert}
+\setbeamercolor{block body alerted} {bg = blockbody}
+\setbeamercolor{alerted text} {fg = alert}
+\setbeamercolor{footnote mark}{fg = alert}
+\setbeamercolor{caption name} {fg = alert}
+\setbeamercolor{section in head/foot}{fg = white,
+                                      bg = black}
+\setbeamercolor{section in toc}{fg = black}
+\setbeamercolor*{itemize item}{fg = alert}
+\setbeamercolor*{itemize subitem}{fg = alert}
+\setbeamercolor*{itemize subsubitem}{fg = alert}
+\setbeamercolor*{item projected}{fg = white, bg = alert}
+\setbeamercolor*{description item}{fg = alert}
+\setbeamercolor{bibliography item}{fg = black}
+\setbeamercolor{bibliography entry author}{fg = black}
+\setbeamercolor{bibliography entry location}{fg = structure}
+
+%% Custom colours:
+\setbeamercolor{author in final frame}  {fg = bostonuniversityred}
+\setbeamercolor{title in final frame}   {fg = bostonuniversityred}
+\setbeamercolor{subtitle in final frame}{fg = structure}
+%\setbeamercolor*{section page}{fg = black, bg = blockbody}
+\setbeamercolor*{section page}{fg = black, bg = blockbody}
+
+%% Standard fonts:
+\setbeamerfont{author}    {size   = \Large,
+                           series = \normalfont\bfseries}
+\setbeamerfont{title}     {size   = \LARGE,
+                           series = \bfseries}
+\setbeamerfont{subtitle}  {size   = \Large,
+                           series = \normalfont\rmfamily}
+\setbeamerfont{date}      {size   = \large,
+                           series = \bfseries}
+\setbeamerfont{frametitle}{size = \normalfont,
+                           series = \bfseries}
+\setbeamerfont{title in head/foot} {series = \bfseries}
+\setbeamerfont{author in head/foot}{series = \bfseries}
+\setbeamerfont{date in head/foot}  {series = \bfseries}
+\setbeamerfont{section in toc}     {series = \bfseries}
+\setbeamerfont{bibliography item}        {series = \bfseries}
+\setbeamerfont{bibliography entry author}{series = \bfseries}
+\setbeamerfont{bibliography entry title}{series = \mdseries}
+\setbeamerfont{item projected}     {series = \bfseries}
+
+%% Custom fonts:
+\setbeamerfont{author in final frame}  {size   = \LARGE,
+                                        series = \bfseries}
+\setbeamerfont{title in final frame}   {size   = \LARGE,
+                                        series = \bfseries}
+\setbeamerfont{subtitle in final frame}{  size = \Large,
+                                        series = \normalfont\rmfamily}
+\setbeamerfont*{section page}{size   = \Huge,
+                              series = \bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{title page}
+{
+    \AddToShipoutPictureFG*
+    {
+        \AtPageUpperLeft
+        {  
+            %\hspace{1cm}
+            \hspace{-1.0cm}
+            \parbox[t][2.0cm][b]{\textwidth}
+            {
+                \includegraphics[height = 1.8cm]
+                {./images/template/logo_su_sgrada_white_line_bg.png}
+            }
+        }
+        \AtPageLowerLeft
+        {%
+            \hspace{1.0cm}
+            \parbox[b][2.4cm][t]{\textwidth}
+            {%
+                %\includegraphics[height = 2.0cm]
+                %{./images/template/sofia-250x300.png}
+            }
+        }
+        \AtPageLowerLeft
+        {%
+            %\hspace{3.175cm} <- when there is picture
+            \hspace{1cm}
+            \parbox[b][1.85cm][t]{\textwidth}
+            {%
+                \usebeamerfont{author}
+                \small
+                \insertauthor
+                \vspace{0.5cm}
+                \small
+                \\
+                Научен ръководител: \textsc{проф. дфзн Радослав Христов Рашков}
+            }
+        }
+        \AtPageUpperLeft
+        {
+            \makebox[\paperwidth][r]
+            {
+                \parbox[t][\paperheight][b]{3.2cm}
+                {%
+                    \includegraphics[height = 1.07\paperheight]
+                    {./images/template/image997.png}
+                }%
+            }
+        }
+    }
+
+    \vspace{2cm}
+    \hspace*{0.4cm}
+    \begin{minipage}[b][\paperheight - 3cm]{\paperwidth - 4.3cm}
+        \raggedright
+
+        \vfill
+
+        \usebeamerfont{title}
+        \usebeamercolor[fg]{title}
+        \inserttitle
+        \\[1ex]
+
+        \usebeamerfont{subtitle}
+        \usebeamercolor[fg]{subtitle}
+        \small{
+        %\hspace{1cm}\insertsubtitle}
+        \insertsubtitle}
+        
+        \vfill
+        \vspace*{2.4cm}
+    \end{minipage}
+}
+
+
+\newcommand{\TitlePage}
+{
+    \begin{frame}[plain, noframenumbering]
+        \titlepage
+    \end{frame}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newlength{\radius}
+\setlength{\radius}{0.04\paperwidth}
+
+\newcommand{\FinalFrame}
+{
+    {
+        %\setbeamercolor{background canvas}{bg = structure}
+
+        \begin{frame}[plain, noframenumbering]
+
+            \AddToShipoutPictureFG*
+            {
+                \AtPageUpperLeft
+                {  
+                    \hspace{-0.5cm}
+                    \parbox[t][2.0cm][b]{\textwidth}
+                    {
+                       \includegraphics[height = 1.8cm]
+                       {./images/template/logo_su_sgrada_white_line_bg.png}
+                    }
+                }
+
+
+                \AtPageLowerLeft
+                {
+                  \hspace{-1cm}
+                    \parbox[b][2.0cm][t]{\textwidth}
+                    {
+                      \vspace{-1cm}
+                      %\includegraphics[width = 1.1\linewidth]
+                      %  {./images/template/fzf.png}
+                    }
+                }
+                %Include images for the bullets in last slide. Must be circular
+                %images. The template will (try to) scale them.
+                \AtPageLowerLeft
+                {
+                    \hspace{2\radius}
+                    \parbox[b][0.72\paperheight][t]{2\radius}
+                    {
+                        \includegraphics[width=2\radius]{images/template/face.png}
+                        \smallskip\linebreak
+                        \includegraphics[width=2\radius]{images/template/phd.png}
+                        \smallskip\linebreak
+                        \includegraphics[width=2\radius]{images/template/faculty.png}
+                    }
+                }
+
+                \AtPageUpperLeft
+                {
+                    \hspace{4.5\radius}
+                    \parbox[t]
+                    [\dimexpr0.28\paperheight+2\radius\relax]
+                    [b]
+                    {\dimexpr\textwidth-5\radius\relax}
+                    {
+                        \vbox to 2\radius
+                        {
+                            \vfill
+                            \raggedright
+                            \usebeamerfont{author in final frame}
+                            \usebeamercolor[fg]{author in final frame}
+                            \insertauthor
+                            \vfill
+                        }
+                    }
+                }
+
+                \AtPageLowerLeft
+                {
+                    \hspace{4.5\radius}
+                    \parbox[b]
+                    [\dimexpr0.72\paperheight-3.1\radius\relax]
+                    [t]
+                    {\dimexpr\textwidth-5\radius\relax}
+                    {
+                        \raggedright
+                        \usebeamerfont{title in final frame}
+                        \usebeamercolor[fg]{title in final frame}
+                        \inserttitle
+                        \\
+                        \usebeamerfont{subtitle in final frame}
+                        \usebeamercolor[fg]{subtitle in final frame}
+                        {\small\insertsubtitle}
+                        \\
+                        \vspace{0.5cm}
+                        \usebeamerfont{title in final frame}
+                        \usebeamercolor[fg]{title in final frame}
+                        \department
+                        \\
+                        \usebeamerfont{subtitle in final frame}
+                        \usebeamercolor[fg]{subtitle in final frame}
+                        \faculty
+                    }
+                }
+            }
+        \end{frame}
+    }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{frametitle}
+{
+    \vbox
+    {
+        \strut\insertframetitle\strut
+    }
+    \vskip-1.3ex
+}
+
+\renewcommand{\framesubtitle}[1]{\par\smallskip\textbf{\large#1}\par\medskip}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{headline}
+{%
+    \ifbool{logo}
+    {%
+        \AddToShipoutPictureFG*
+        {%
+            \AtPageUpperLeft
+            {%
+                \hspace{2.1 mm}
+                \parbox[t][0.9 cm][b]{\textwidth}
+                {%
+                    \includegraphics[scale = 0.2]
+                    {images/template/sofia-250x300.png-\MATHlang}
+                }
+            }
+        }
+        \vspace*{11mm}
+    }
+    {\vspace*{1.7 mm}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setbeamertemplate{footline}
+{%
+    \hbox to \paperwidth
+    {%
+        \begin{beamercolorbox}[wd = \paperwidth,
+                               ht = 2.25ex,
+                               dp = 1ex]
+                              {section in head/foot}
+
+                \hspace*{5mm}
+                \usebeamerfont{author in head/foot}
+                \insertshortauthor
+                \hfill
+                \usebeamerfont{title in head/foot}
+                \insertshorttitle
+                \hfill
+                \usebeamerfont{date in head/foot}
+                \insertshortdate
+                \hspace*{2em}
+                \insertframenumber{} / \inserttotalframenumber
+                \hspace*{5mm}
+        \end{beamercolorbox}
+    }
+    \vspace{0pt}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Increase indentation:
+\AtBeginEnvironment{itemize}  {\addtolength{\leftmargini}{1mm}}
+\AtBeginEnvironment{enumerate}{\addtolength{\leftmargini}{1.5mm}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Reference enumerate items
+\newcommand{\enumref}[1]
+{%
+    \leavevmode\unskip
+    \def\insertenumlabel{\ref{#1}}
+    \usebeamertemplate*{enumerate item}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Redefine TOC with larger indentation.
+\setbeamertemplate{section in toc}
+{
+    \leavevmode
+    \leftskip = 10mm
+    \llap
+    {%
+        \usebeamerfont*{section number projected}
+        \usebeamercolor[bg]{section number projected}
+        \begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex}
+            \color{bg}
+            \pgfpathcircle{\pgfpoint{0pt}{.75ex}}{1.2ex}
+            \pgfusepath{fill}
+            \pgftext[base]{\color{fg}\inserttocsectionnumber}
+        \end{pgfpicture}%
+        \kern1.25ex%
+    }%
+    \kern1.25ex
+    \parbox[t]{\dimexpr\textwidth-27.1mm\relax}{\inserttocsection}
+    \par
+}
+
+\setbeamertemplate{subsection in toc}
+{
+    \leavevmode
+    \leftskip = \dimexpr10mm+1em\relax
+    {%
+        \usebeamercolor[bg]{subsection number projected}
+        \Large
+        $\bullet$
+    }%
+    \hskip1ex
+    \inserttocsubsection
+    \par
+}
+
+\setbeamertemplate{subsubsection in toc}
+{
+    \leavevmode
+    \normalsize
+    \usebeamerfont{subsection in toc}
+    \leftskip  = \dimexpr10mm+2.5em\relax
+    \usebeamerfont{subsubsection in toc}
+    \llap
+    {%
+       \usebeamercolor[bg]{subsubsection number projected}
+       $\bullet$
+    }%
+    \parbox[t]{\dimexpr\textwidth-27.1mm-5.25ex\relax}
+              {\inserttocsubsubsection}
+    \par
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Redefine blocks with larger indentations,
+%% and some environmental colours:
+\setbeamertemplate{block begin}
+{
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title}
+
+        \usebeamerfont*{block title}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{block example begin}
+{
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title example}
+
+        \usebeamerfont*{block title example}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body example}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body example}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block example end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setbeamertemplate{block alerted begin}
+{
+    \unskip
+    \vskip1.3ex
+
+    \begin{beamercolorbox}[ht        = 2.4  ex,
+                           dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex]
+                          {block title alerted}
+
+        \usebeamerfont*{block title alerted}
+        \insertblocktitle
+    \end{beamercolorbox}
+
+    \nointerlineskip
+
+    \usebeamerfont{block body alerted}
+    \begin{beamercolorbox}[dp        = 1    ex,
+                           leftskip  = 0.75 ex,
+                           rightskip = 0.75 ex,
+                           vmode]
+                          {block body alerted}
+        \vspace*{1ex}
+        \begin{minipage}{\textwidth - 1.5ex}
+}
+
+\setbeamertemplate{block alerted end}
+{
+        \end{minipage}
+    \vskip0pt
+    \end{beamercolorbox}
+    \vskip1.3ex
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{section page}
+{\begin{center}
+ \baselineskip
+ \begin{alertblock}
+   {\LARGE\centering\thesection.~\insertsection}
+ \end{alertblock}
+ \end{center}}
+
+\newcommand{\SectionPage}
+{{%
+    \setbeamercolor{background canvas}{parent = section page}
+    \begin{frame}[c, plain, noframenumbering]
+        \sectionpage
+    \end{frame}
+}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\mode<all>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Translate environment names to Bulgarian:
+\uselanguage {\MATHlang}
+\languagepath{\MATHlang}
+
+\deftranslation[to = bg]{assumption} {приемане}
+\deftranslation[to = bg]{Assumption} {Приемане}
+\deftranslation[to = bg]{axiom}      {аксиома}
+\deftranslation[to = bg]{Axiom}      {Аксиома}
+\deftranslation[to = bg]{calculation}{извеждане}
+\deftranslation[to = bg]{Calculation}{Извеждане}
+\deftranslation[to = bg]{conjecture} {хипотеза}
+\deftranslation[to = bg]{Conjecture} {Хипотеза}
+\deftranslation[to = bg]{corollary}  {следствие}
+\deftranslation[to = bg]{Corollary}  {Следствие}
+\deftranslation[to = bg]{Definition} {Дефиниция}
+\deftranslation[to = bg]{definitions}{дефиниции}
+\deftranslation[to = bg]{Definitions}{Дефиниции}
+\deftranslation[to = bg]{example}    {пример}
+\deftranslation[to = bg]{Example}    {Пример}
+\deftranslation[to = bg]{examples}   {примери}
+\deftranslation[to = bg]{Examples}   {Примери}
+\deftranslation[to = bg]{notation}   {означение}
+\deftranslation[to = bg]{Notation}   {Oзначение}
+\deftranslation[to = bg]{property}   {свойство}
+\deftranslation[to = bg]{Property}   {Свойство}
+\deftranslation[to = bg]{proposition}{предположение}
+\deftranslation[to = bg]{Proposition}{Предположение}
+\deftranslation[to = bg]{remark}     {bemerkning}
+\deftranslation[to = bg]{Remark}     {Bemerkning}
+\deftranslation[to = bg]{remarks}    {бележка}
+\deftranslation[to = bg]{Remarks}    {Бележка}
+\deftranslation[to = bg]{theorem}    {теорема}
+\deftranslation[to = bg]{Theorem}    {Теорема}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Define additional theorem-like environments:
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Conjecture}}]
+                {conjecture}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Facts}}]
+                {facts}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Hypothesis}}]
+                {hypothesis}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Observation}}]
+                {observation}
+\declaretheorem[style   = plain,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Proposition}}]
+                {proposition}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\MATHlang]{Assumption}}]
+                {assumption}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\MATHlang]{Axiom}}]
+                {axiom}
+\declaretheorem[style = definition,
+                name  = {\translate[to=\MATHlang]{Property}}]
+                {property}
+\declaretheorem[style    = definition,
+                numbered = no,
+                name     = {\translate[to=\MATHlang]{Calculation}}]
+                {calculation}
+\declaretheorem[style    = definition,
+                numbered = no,
+                name     = {\translate[to=\MATHlang]{Computation}}]
+                {computation}
+\declaretheorem[style   = definition,
+                sibling = theorem,
+                name    = {\translate[to=\MATHlang]{Notation}}]
+                {notation}
+\declaretheorem[style = remark,
+                name  = {\translate[to=\MATHlang]{Remark}}]
+                {remark}
+\declaretheorem[style   = remark,
+                sibling = remark,
+                name    = {\translate[to=\MATHlang]{Remarks}}]
+                {remarks}
+
+\endinput
